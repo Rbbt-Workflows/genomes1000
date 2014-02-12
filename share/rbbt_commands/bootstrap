@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'rbbt/workflow'
+Workflow.require_workflow "Genomes1000"
+require 'rbbt/sources/genomes1000'
+
+
+claims = [Genomes1000.mutations]
+knowledge_base = %w()
+
+claims.each{|claim| claim.produce }
+knowledge_base.each{|database| COSMIC.knowledge_base.get_database(database) }
+

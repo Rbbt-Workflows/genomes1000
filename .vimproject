@@ -1,0 +1,19 @@
+Genomes1000=/$PWD/ filter="*"{
+ workflow.rb
+ lib=lib{
+  rbbt=rbbt{
+   sources=sources{
+    genomes1000.rb
+    genomes1000=genomes1000{
+     indices.rb
+     entity.rb
+    }
+   }
+  }
+ }
+ share=share{
+  rbbt_commands=rbbt_commands{
+   bootstrap
+  }
+ }
+}
