@@ -36,37 +36,6 @@ module Genomes1000
 
     Sequence.swap_build Genomes1000.mutations, filename, Genomes1000.organism, "Hsa/may2009"
     nil
-
-    #hg19 = Genomes1000.mutations.tsv :type => :list
-    #hg19 = hg19.attach Sequence.job(:liftover, "Genomes1000", :positions => hg19.values, :source => Genomes1000.organism, :target => "Hsa/may2009").run
-
-    #tsv = hg19.reorder("Hsa/may2009", hg19.fields - ["Hsa/may2009", "Genomic Mutation"])
-    #tsv.key_field = "Genomic Mutation"
-
-    #tsv.to_s
-    #TmpFile.with_file do |source_bed|
-    #  Open.write(source_bed) do |file|
-    #    Genomes1000.mutations.open do |line|
-    #      file.puts line.split("\t")[1].split
-    #    end
-    #  end
-    #end
-
-
-
-    #hg19_tsv = Genomes1000.mutations.tsv :unnamed => true
-
-    #mutations = hg19_tsv.values
-
-    #translations = Misc.process_to_hash(mutations){|mutations| Organism.liftOver(mutations, Genomes1000.organism, "Hsa/may2009")}
-
-    #tsv = hg19_tsv.process "Genomic Mutation" do |mutation|
-    #  translations[mutation]
-    #end
-
-    #tsv.namespace = "Hsa/may2009"
-
-    #tsv.to_s
   end
 
 end
