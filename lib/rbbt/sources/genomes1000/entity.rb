@@ -1,3 +1,4 @@
+require 'rbbt/sources/genomes1000/indices'
 
 if defined? Entity
   if defined? Gene and Entity === Gene

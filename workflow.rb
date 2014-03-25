@@ -12,3 +12,4 @@ module Genomes1000
 end
 
 require 'rbbt/sources/genomes1000'
+require 'rbbt/sources/genomes1000/entity'
