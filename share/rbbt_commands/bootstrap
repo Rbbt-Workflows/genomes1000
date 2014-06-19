@@ -4,9 +4,7 @@ require 'rbbt/workflow'
 Workflow.require_workflow "Genomes1000"
 require 'rbbt/sources/genomes1000'
 
-claims = [Genomes1000.mutations, Genomes1000.mutations_hg18]
-knowledge_base = %w()
+claims = [Genomes1000.mutations, Genomes1000.rsids]
 
 claims.each{|claim| claim.produce }
-knowledge_base.each{|database| COSMIC.knowledge_base.get_database(database) }
 
