@@ -15,7 +15,7 @@ module Genomes1000
     dumper = TSV::Dumper.new :key_field => "Genomic Mutation", :fields => ["RS ID"], :type => :single
     dumper.init
     database = Genomes1000.database
-    TSV.traverse mutations, :into => dumper, :bar => true do |mutation|
+    TSV.traverse mutations, :into => dumper, :bar => true, :type => :array do |mutation|
       next if mutation.empty?
       rsid = database[mutation]
       next if rsid.nil?
