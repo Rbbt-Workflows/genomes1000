@@ -92,4 +92,11 @@ module Genomes1000
                       end
                     end
   end
+
+
+  def self.rsid_database
+    @@rsid_database ||= begin
+                          Genomes1000.rsids.tsv :persist => true, :persist_file => Rbbt.var.Genomes1000.rsids.find
+                        end
+  end
 end
