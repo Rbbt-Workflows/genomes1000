@@ -78,6 +78,7 @@ module Genomes1000
   def self.database
     @@database ||= begin
                      Persist.persist_tsv("Genomes1000", Genomes1000.mutations, {}, :persist => true,
+                                         :file => Rbbt.var.Genomes1000.mutations_shard.find,
                                          :prefix => "Genomes1000", :serializer => :string, :engine => "HDB",
                                          :shard_function => GM_SHARD_FUNCTION, :pos_function => CHR_POS) do |sharder|
                        sharder.fields = ["RS ID"]
