@@ -6,7 +6,9 @@ module Genomes1000
   extend Resource
   self.subdir = "share/databases/genomes_1000"
 
-  RELEASE_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20110521/ALL.wgs.phase1_release_v3.20101123.snps_indels_sv.sites.vcf.gz"
+  #RELEASE_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20110521/ALL.wgs.phase1_release_v3.20101123.snps_indels_sv.sites.vcf.gz"
+
+  RELEASE_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5.20130502.sites.vcf.gz"
 
   #Genomes1000.claim Genomes1000.mutations, :proc do |filename|
 
@@ -49,6 +51,7 @@ module Genomes1000
 
         chr, pos, id, ref, alt, qual, filter, info = line.split("\t")
         pos, alt = Misc.correct_vcf_mutation(pos.to_i, ref, alt) 
+        next if id == '.'
 
         mutation = [chr, pos, alt] * ":"
         file.puts [id, mutation] * "\t"
@@ -59,7 +62,7 @@ module Genomes1000
 
   Genomes1000.claim Genomes1000.rsids, :proc do
     Workflow.require_workflow "Sequence"
-    TSV.reorder_stream(Sequence::VCF.open_stream(Open.open(RELEASE_URL, :nocache => true), false, false, true), {0 => 2})
+    TSV.reorder_stream(Sequence::VCF.open_stream(Open.open(RELEASE_URL, :nocache => true), false, false, true), {0 => 2}).select{|k,v| k != '.' }
   end
 
   GM_SHARD_FUNCTION = Proc.new do |key|
@@ -88,6 +91,7 @@ module Genomes1000
                        TSV.traverse Genomes1000.mutations, :type => :array, :into => sharder, :bar => "Processing Genomes1000" do |line|
                          next if line =~ /^#/
                          rsid,_sep, mutation = line.partition "\t"
+                         next if rsid == '.'
                          [mutation, rsid]
                        end
                       end
