@@ -10,7 +10,7 @@ module Genomes1000
 
   self.organism = "Hsa/jan2013"
 
-  input :mutations, :array, "Genomic Mutation"
+  input :mutations, :array, "Genomic Mutation", nil, :stream => true
   task :identify => :tsv do |mutations|
     dumper = TSV::Dumper.new :key_field => "Genomic Mutation", :fields => ["RS ID"], :type => :single
     dumper.init
