@@ -63,7 +63,7 @@ module Genomes1000
 
   Genomes1000.claim Genomes1000.rsids, :proc do
     Workflow.require_workflow "Sequence"
-    TSV.reorder_stream(Sequence::VCF.open_stream(Open.open(RELEASE_URL, :nocache => true), false, false, true), {0 => 2}).select{|k,v| k != '.' }
+    CMD.cmd('grep -v "^-"', :in => TSV.reorder_stream(Sequence::VCF.open_stream(Open.open(RELEASE_URL, :nocache => true), false, false, true), {0 => 2}), :pipe => true)
   end
 
   GM_SHARD_FUNCTION = Proc.new do |key|
