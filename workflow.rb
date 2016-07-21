@@ -8,7 +8,7 @@ module Genomes1000
     attr_accessor :organism
   end
 
-  self.organism = "Hsa/jan2013"
+  self.organism = "Hsa/feb2014"
 
   input :mutations, :array, "Genomic Mutation", nil, :stream => true
   task :identify => :tsv do |mutations|
