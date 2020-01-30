@@ -26,7 +26,7 @@ module Genomes1000
   dep :identify
   task :annotate => :tsv do 
     database = Genomes1000.rsid_database
-    dumper = TSV::Dumper.new :key_field => "Genomic Mutation", :fields => ["RS ID"] + database.fields[1..-1], :type => :single
+    dumper = TSV::Dumper.new :key_field => "Genomic Mutation", :fields => ["RS ID"] + database.fields[1..-1], :type => :list
     dumper.init
     TSV.traverse step(:identify), :into => dumper, :bar => self.progress_bar("Annotate with Genomes1000") do |mutation, rsid|
       next if mutation.empty?
