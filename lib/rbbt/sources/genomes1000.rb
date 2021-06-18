@@ -6,7 +6,7 @@ module Genomes1000
   extend Resource
   self.subdir = "share/databases/genomes_1000"
 
-  RELEASE_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5b.20130502.sites.vcf.gz"
+  RELEASE_URL = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5c.20130502.sites.vcf.gz"
 
   Genomes1000.claim Genomes1000.mutations, :proc do |filename|
     Open.write filename do |file|
